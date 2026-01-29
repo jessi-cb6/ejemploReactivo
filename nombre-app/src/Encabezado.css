@@ -1,7 +1,7 @@
 .encabezado{
-    background-color: #003366;
+    background-color: #efa0fa;
     display: flex;
-    color: #D4AF37;
+    color: #ffffff;
     height: auto;
     align-items: center;
     align-content: center;
@@ -25,7 +25,7 @@
 }
 
 .Menu ul li:hover {
-    color: #FFFFFF;
+    color: #000000;
 }
 
 

@@ -1,6 +1,6 @@
 function Expresiones(){
-    const nombre = 'Luis';
-    const apellidos='Hernandez'
+    const nombre = 'Jessica';
+    const apellidos='Cruz'
     return(
         <div>
             <h2>Expresiones</h2>

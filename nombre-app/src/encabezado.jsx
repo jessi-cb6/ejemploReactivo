@@ -3,7 +3,7 @@ import  yutu from './assets/yutu.webp'
 import  wats from './assets/wats.webp' 
 import  insta from './assets/insta.webp' 
 import  face from './assets/face.webp' 
-import  logo from './assets/logo.webp' 
+import  logo from './assets/logo.png' 
 function Encabezado(){
     
     return (

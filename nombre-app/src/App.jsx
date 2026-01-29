@@ -8,7 +8,7 @@ function App(){
     <Encabezado/>
     <Expresiones/>
     <h1>SC DSM</h1>
-    <h2>M.T.I. Luis Angel Hernabndez Hernandez</h2> 
+    <h2>Jessica Cruz Barona</h2> 
     </div>
   )
 }
