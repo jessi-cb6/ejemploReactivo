@@ -1,0 +1,52 @@
+.tarjetas {
+    margin-top: 20px;
+    padding: 50px;
+    background-color: #f2e0f5;
+    display: flex;
+    color: #ffffff;
+    height: auto;
+    align-items: center;
+    align-content: center;
+    width: 100%;
+    justify-content: space-around;
+}
+
+.uno {
+    margin-top: 20px;
+    display: inline-block;
+   margin-right: 50px;
+    vertical-align: middle;
+  
+}
+.uno img{
+    width: 400px;
+    height: auto;
+    
+}
+
+.dos {
+    margin-top: 20px;
+
+    display: inline-block;
+
+    vertical-align: middle;
+       margin-right: 50px;
+
+}
+.dos img{
+    width: 500px;
+    height: auto;
+}
+.tres {
+    margin-top: 20px;
+
+    display: inline-block;
+    
+    vertical-align: middle;
+       margin-right: 50px;
+
+}
+.tres img{
+    width: 500px;
+    height:auto;
+}
