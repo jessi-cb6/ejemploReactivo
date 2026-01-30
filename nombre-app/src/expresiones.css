@@ -8,7 +8,8 @@
     align-items: center;
     align-content: center;
     width: 100%;
-    justify-content: space-around;
+    justify-content:center;
+margin: 10px;
 }
 
 .uno {
@@ -35,7 +36,7 @@
 }
 .dos img{
     width: 500px;
-    height: auto;
+    height:auto;
 }
 .tres {
     margin-top: 20px;
