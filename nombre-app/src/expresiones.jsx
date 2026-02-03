@@ -6,36 +6,50 @@ import tarjet3 from './assets/tarjet3.jpg'
 function Expresiones(){
     return(
         <div className='tarjetas'>
-            <Tarjeta1/>
-            <Tarjeta2/>
-            <Tarjeta3/>
+            <Tarjeta1 name ="jessica" descripcion="jessica cruz barona"/>
+            <Tarjeta2 name="luis Angel " descripcion="luis angel hernandez hernandez"/>
+            <Tarjeta3 name="teodoro" descripcion=" teodoro hernandez cruz" saludarfunc = {saludar}/>
         </div>
     )
 }
-function Tarjeta1(){
+function Tarjeta1(props){
     return(
 <div className='uno'>
     <img src={tarjet1} alt="" />
-    <h1>“Buen provecho y cero remordimientos.”</h1>
+    <h1>{props.name}</h1>
+    <h1>{ props.descripcion}</h1>
 </div>
     )
 }
-function Tarjeta2(){
+function Tarjeta2(props){
     return(
         <div className='dos'>
             <img src={tarjet2} alt=""/>
-            <h1>“El amor entra por el estómago… y el postre también.”</h1>
+            <h1>{props.name}</h1>
+            <h1>{props.descripcion}</h1>
         </div>
 
     )
 }
-function Tarjeta3(){
+function Tarjeta3(props){
     return(
        <div className='tres'>  
          <img src={tarjet3} alt=""/>
-         <h1>“Buen provecho y cero remordimientos.”</h1>
+         <h1>{props.name}</h1>
+         <h1>{props.descripcion}</h1>
+         <p>{props.saludarfunc()}</p>
        </div>
 
     )
 }
+
+function saludar(){
+    return(
+        <div>
+        <h1> holaa</h1>
+        </div>
+    )
+}
+
+
 export default Expresiones
