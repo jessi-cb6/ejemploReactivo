@@ -1,5 +1,10 @@
 function AcercaDe() {
-  return <h1>Información sobre nosotros</h1>
+  return(
+     <div>
+    
+  </div>
+  )
+
 }
 
 export default AcercaDe

@@ -1,53 +1,71 @@
 .tarjetas {
     margin-top: 20px;
     padding: 50px;
-    background-color: #f2e0f5;
+    background-color: hsla(147, 57%, 19%, 0.815);
     display: flex;
-    color: #ffffff;
+    color: #0c4b1f;
     height: auto;
     align-items: center;
     align-content: center;
     width: 100%;
-    justify-content:center;
-margin: 10px;
+    justify-content: center;
+    margin: 10px;
+    font-family: "Dancing Script", cursive;
+    font-size: 8px;
 }
 
 .uno {
-    margin-top: 20px;
     display: inline-block;
-   margin-right: 50px;
-    vertical-align: middle;
-  
+    margin: 20px;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.438);
+    border-radius: 10%;
+
 }
-.uno img{
+
+.tiuno {
+    font-family: 'Luckiest Guy', cursive;
+    font-size: 50px;
+    color: #32d162;
+    -webkit-text-stroke: 3px #ffffff;
+}
+
+.uno img {
     width: 400px;
     height: auto;
-    
+
 }
 
 .dos {
-    margin-top: 20px;
-
     display: inline-block;
-
-    vertical-align: middle;
-       margin-right: 50px;
+    margin: 20px;
+    padding: 20px;
+    background-color: rgba(251, 255, 249, 0.438);
+    border-radius: 10%;
 
 }
-.dos img{
+
+.dos img {
     width: 500px;
-    height:auto;
+    height: auto;
 }
+
 .tres {
-    margin-top: 20px;
-
     display: inline-block;
-    
-    vertical-align: middle;
-       margin-right: 50px;
-
+    margin: 20px;
+    padding: 20px;
+    background-color: rgba(251, 255, 249, 0.438);
+    border-radius: 10%;
 }
-.tres img{
+
+.tres img {
     width: 500px;
-    height:auto;
+    height: auto;
+}
+
+.tarjetas img {
+    width: 400px;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 10px;
 }
