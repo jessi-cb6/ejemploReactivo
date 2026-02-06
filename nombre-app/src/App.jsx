@@ -1,23 +1,31 @@
-import './App.css'
-import Encabezado from "./encabezado";
-import Expresiones from "./expresiones";
-import Pie from './piePagina';
+import { useState } from "react"
+import Encabezado from "./encabezado"
+import Expresiones from "./expresiones"
+import Pie from "./piePagina"
+
+
+import Inicio from "./vistas/Inicio"
+import AcercaDe from "./vistas/AcercaDe"
+import Productos from "./vistas/Productos"
+import Contactos from "./vistas/Contactos"
+import Sucursales from "./vistas/Sucursales"
 
 function App() {
+  const [vista, setVista] = useState("Inicio")
+
   return (
+    <div>
+      <Encabezado cambiarVista={setVista} />
 
-    <div className='texto'>
-      <Encabezado/>
-      <Expresiones/>
-      <Promociones name=''/>
-      
-  
-      
-      
-     
-<Pie/>
+      {vista === "Inicio" && <Inicio />}
+      {vista === "AcercaDe" && <AcercaDe />}
+      {vista === "Productos" && <Productos />}
+      {vista === "Contactos" && <Contactos />}
+      {vista === "Sucursales" && <Sucursales />}
+
+      <Expresiones />
+      <Pie />
     </div>
-
   )
 }
 
