@@ -24,6 +24,13 @@
 }
 
 
+
+.fila1 h1{
+    
+    margin-bottom: 10px;
+    font-size: 15px;
+   text-align:center;
+}
 .contenedor{
     background-color:rgb(0, 0, 0);
     color: white;
@@ -31,7 +38,68 @@
 
     
 }
-.fila1 h1{
+
+
+.fila2 {
+    display: flex;          
+    flex-direction: row;    
+    justify-content: center;
+    
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 0;
+    margin: 0;
+    padding: 0;
+}
+
+.fila2 img {
+    width: 200px;
+    height:auto;
+    width: 200px;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    display: block;
+    margin-top: 100px;
+}
+
+
+
+.fila2 h1{
+    
+    margin-bottom: 10px;
+    font-size: 15px;
+   text-align:center;
+}
+
+.fila3 {
+    display: flex;          
+    flex-direction: row;    
+    justify-content: center;
+    
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 0;
+    margin: 0;
+    padding: 0;
+}
+
+.fila3 img {
+    width: 150px;
+    height:250px;
+    width: 200px;
+
+    margin: 0;
+    padding: 0;
+    display: block;
+    margin-top: 100px;
+}
+
+
+
+.fila3 h1{
     
     margin-bottom: 10px;
     font-size: 15px;

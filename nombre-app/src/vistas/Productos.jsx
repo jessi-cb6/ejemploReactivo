@@ -45,8 +45,9 @@ function Productos() {
        </div>
 
        <div className="suspenso">
-        <h1></h1>
-        
+        <h1>Suspenso</h1>
+        <div className="fila2">
+          
             <h1>Mi secreto mas intimo</h1>
         <img src={su1} alt="" />
 
@@ -63,8 +64,12 @@ function Productos() {
         <img src={su5} alt="" />
 
        </div>
+        </div>
+       
        <div className="drama">
-        <h1>De villana a heroina</h1>
+         <h1>Drama</h1>
+       <div className="fila3">
+          <h1>De villana a heroina</h1>
         <img src={dr1} alt="" />
 
         <h1>Casate con mi esposo</h1>
@@ -79,6 +84,7 @@ function Productos() {
         <h1>La emperatriz divorciada</h1>
         <img src={dr5} alt="" />
 
+       </div>
        </div>
     </div>
  )
