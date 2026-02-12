@@ -1,8 +1,7 @@
-import{ APIProvider, Map, AdvancedMarker, Pin}  from ' @vis.gl/react-google-maps';
 import "./Inicio.css"
 function 
 Inicio() {
-  const position={lat: 20.271702 ,Ing:-97.969228};
+  
  
   return (
     <div>

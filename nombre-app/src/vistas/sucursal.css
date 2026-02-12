@@ -1,0 +1,32 @@
+.sucursales-contenedor {
+    max-width: 600px;       
+    margin: 40px auto;    
+    padding: 20px;
+    background-color: #16660c; 
+    color: white;
+    border-radius: 10px;    
+}
+
+.titulo-sucursales {
+    font-size: 28px;
+    margin-bottom: 15px;
+}
+
+.texto-sucursales {
+    font-size: 16px;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+.lista-sucursales {
+    list-style: none;       
+    padding: 0;
+    font-size: 16px;
+}
+
+.lista-sucursales li {
+    margin-bottom: 10px;
+    background: #69bd1a;
+    padding: 10px;
+    border-radius: 6px;
+}

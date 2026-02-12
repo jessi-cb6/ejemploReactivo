@@ -1,107 +1,43 @@
 
-.fila1 {
-    display: flex;          
-    flex-direction: row;    
-    justify-content: center;
-    
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    gap: 0;
-    margin: 0;
-    padding: 0;
-}
-
-.fila1 img {
-    width: 200px;
-    height:auto;
-    width: 200px;
-    height: auto;
-    margin: 0;
-    padding: 0;
-    display: block;
-    margin-top: 100px;
-}
-
-
-
-.fila1 h1{
-    
-    margin-bottom: 10px;
-    font-size: 15px;
-   text-align:center;
-}
-.contenedor{
-    background-color:rgb(0, 0, 0);
+.contenedor {
+    background-color: black;
     color: white;
-    text-align: justify;
-
-    
+    padding: 20px;
 }
 
 
-.fila2 {
-    display: flex;          
-    flex-direction: row;    
-    justify-content: center;
-    
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    gap: 0;
-    margin: 0;
-    padding: 0;
-}
-
-.fila2 img {
-    width: 200px;
-    height:auto;
-    width: 200px;
-    height: auto;
-    margin: 0;
-    padding: 0;
-    display: block;
-    margin-top: 100px;
+.contenedor > div > h1 {
+    text-align: center;
+    margin-bottom: 20px;
 }
 
 
-
-.fila2 h1{
-    
-    margin-bottom: 10px;
-    font-size: 15px;
-   text-align:center;
-}
-
+.fila1,
+.fila2,
 .fila3 {
-    display: flex;          
-    flex-direction: row;    
-    justify-content: center;
-    
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    gap: 0;
-    margin: 0;
-    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); 
+    gap: 20px;
+    justify-items: center;
+    margin-bottom: 40px;
 }
 
+
+.fila1 h1,
+.fila2 h1,
+.fila3 h1 {
+    font-size: 14px;
+    text-align: center;
+    margin-bottom: 8px;
+}
+
+
+.fila1 img,
+.fila2 img,
 .fila3 img {
-    width: 150px;
-    height:250px;
-    width: 200px;
-
-    margin: 0;
-    padding: 0;
+    width: 150px;     
+    height: 200px;  
+    object-fit: cover;
+    border-radius: 6px;
     display: block;
-    margin-top: 100px;
-}
-
-
-
-.fila3 h1{
-    
-    margin-bottom: 10px;
-    font-size: 15px;
-   text-align:center;
 }
