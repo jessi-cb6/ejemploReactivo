@@ -4,6 +4,8 @@ function Pie() {
   return (
     <div className="piepagina">
       <footer>Derechos reservados por Jessica Cruz Barona</footer>
+    
+        
     </div>
   )
 }

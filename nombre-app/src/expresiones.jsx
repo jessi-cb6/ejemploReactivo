@@ -19,6 +19,7 @@ function Tarjeta1(props) {
       <img src={tarjet1} alt="" />
       <h1 className = 'tiuno'>{props.name}</h1>
       <h1>{props.descripcion}</h1>
+      
     </div>
   )
 }
