@@ -2,7 +2,7 @@ import { useState } from "react"
 import Encabezado from "./encabezado"
 import Expresiones from "./expresiones"
 import Pie from "./piePagina"
-import Cuadro from "./cuadro"
+import Cuadro from "./Cuadro"
 
 
 import Inicio from "./vistas/inicio"
