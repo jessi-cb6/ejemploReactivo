@@ -1,3 +1,5 @@
+
+import Clima from "./Clima"
 import PropTypes from "prop-types"
 import "./encabezado.css"
 import yutu from "./assets/yutu.webp"
@@ -45,7 +47,9 @@ function Redes() {
       <img src={wats} alt="" />
       <img src={insta} alt="" />
       <img src={yutu} alt="" />
+      <Clima/>
     </div>
+    
   )
 }
 
