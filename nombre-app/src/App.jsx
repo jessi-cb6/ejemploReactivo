@@ -3,6 +3,7 @@ import Encabezado from "./encabezado"
 import Expresiones from "./expresiones"
 import Pie from "./piePagina"
 import Cuadro from "./Cuadro"
+import Usuarios from "./vistas/usuarios"
 
 
 import Inicio from "./vistas/inicio"
@@ -23,6 +24,7 @@ function App() {
       {vista === "Productos" && <Productos />}
       {vista === "Contactos" && <Contactos />}
       {vista === "Sucursales" && <Sucursales />}
+      {vista === "Usuarios" && <Usuarios/>}
 
       <Expresiones />
       <Cuadro/>

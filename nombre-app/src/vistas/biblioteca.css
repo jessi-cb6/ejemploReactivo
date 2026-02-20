@@ -1,43 +1,56 @@
+.classMain {
+  padding: 40px;
+  background-color: #f4f6f9;
+  min-height: 100vh;
+}
 
-.contenedor {
-    background-color: black;
-    color: white;
-    padding: 20px;
+.classMain header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.classMain h1 {
+  font-size: 2.2rem;
+  color: #333;
 }
 
 
-.contenedor > div > h1 {
-    text-align: center;
-    margin-bottom: 20px;
+.classMain {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 25px;
 }
 
 
-.fila1,
-.fila2,
-.fila3 {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr); 
-    gap: 20px;
-    justify-items: center;
-    margin-bottom: 40px;
+.classMain article {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  padding: 20px;
+  text-align: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-
-.fila1 h1,
-.fila2 h1,
-.fila3 h1 {
-    font-size: 14px;
-    text-align: center;
-    margin-bottom: 8px;
+.classMain article:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
 }
 
+.classMain article img {
+  width: 100%;
+  height: 200px;
+  object-fit: contain;
+  margin: 15px 0;
+}
 
-.fila1 img,
-.fila2 img,
-.fila3 img {
-    width: 150px;     
-    height: 200px;  
-    object-fit: cover;
-    border-radius: 6px;
-    display: block;
+.classMain article p:first-of-type {
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.classMain article p:last-of-type {
+  color: #2e7d32;
+  font-weight: bold;
+  font-size: 1.1rem;
 }
