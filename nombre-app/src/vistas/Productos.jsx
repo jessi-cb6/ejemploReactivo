@@ -1,6 +1,7 @@
 import "./biblioteca.css"
 import api from "../services/api"
 import { useEffect, useState } from 'react';
+import RegistarProductos from "../RegistrarProductos";
 
 
 
@@ -30,6 +31,7 @@ obtenerProductos();
    <header>
       <h1>Nuestro catalogo</h1>
    </header>
+   <RegistarProductos/>
    {Productos.map((Producto)=>(
       <article key={Producto.id}>
          <p>{Producto.title}</p>
