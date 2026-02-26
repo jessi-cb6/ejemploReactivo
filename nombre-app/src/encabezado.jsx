@@ -35,7 +35,8 @@ function Menu({ cambiarVista }) {
         <li onClick={() => cambiarVista("Productos")}>Biblioteca</li>
         <li onClick={() => cambiarVista("Contactos")}>Contactos</li>
         <li onClick={() => cambiarVista("Sucursales")}>Sucursales</li>
-        <li onClick={()=> cambiarVista("Usuarios")}>Usuarios</li>
+        <li onClick={() => cambiarVista("Usuarios")}>Usuarios</li>
+        <li onClick={() => cambiarVista("Carrito")}>Carrito</li>
       </ul>
     </div>
   )
@@ -48,9 +49,9 @@ function Redes() {
       <img src={wats} alt="" />
       <img src={insta} alt="" />
       <img src={yutu} alt="" />
-      <Clima/>
+      <Clima />
     </div>
-    
+
   )
 }
 

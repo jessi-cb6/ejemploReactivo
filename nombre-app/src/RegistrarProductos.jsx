@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import api from "./services/api";
 import axios from "axios";
-
 function RegistarProductos() {
     const [title, setTitle] = useState('');
     const [price, setPrice] = useState('');
@@ -29,28 +28,29 @@ function RegistarProductos() {
                     placeholder="Titulo"
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
-                    />
-                    <input type="number"
+                />
+
+                <input type="number"
                     placeholder="Precio"
                     value={price}
-                    onChange={(e)=> setPrice(e.target.value)}
-                    />
-                    <input type="text"
+                    onChange={(e) => setPrice(e.target.value)}
+                />
+                <input type="text"
                     placeholder="Descripcion"
                     value={description}
-                    onChange={(e)=> setDescription(e.target.value)}
-                    />
-                    <input type="text"
+                    onChange={(e) => setDescription(e.target.value)}
+                />
+                <input type="text"
                     placeholder="Categoria"
                     value={category}
-                    onChange={(e)=> setCategory(e.target.value)}
-                    />
-                    <input type="text"
+                    onChange={(e) => setCategory(e.target.value)}
+                />
+                <input type="text"
                     placeholder="Imagen"
                     value={image}
-                    onChange={(e)=> setImage(e.target.value)}
-                    />
-                    <button  type="submit">Registrar</button>
+                    onChange={(e) => setImage(e.target.value)}
+                />
+                <button type="submit">Registrar</button>
             </form>
         </div>
     )

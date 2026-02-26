@@ -1,5 +1,6 @@
 import api from "../services/api";
 import { useEffect, useState } from "react";
+import "./usurios.css";
 
 function Usuarios() {
   const [usuarios, setUsuarios] = useState([]);
@@ -20,25 +21,62 @@ function Usuarios() {
     obtenerUsuarios();
   }, []);
 
+  const eliminarUsuario = async (id) => {
+    try {
+      await api.delete(`users/${id}`);
+      setUsuarios(usuarios.filter((u) => u.id !== id));
+    } catch (error) {
+      console.error("Error al eliminar usuario", error);
+    }
+  };
+
+  const editarUsuario = (id) => {
+    alert("Aquí puedes redirigir a editar usuario con id: " + id);
+    // ejemplo: navigate(`/editar/${id}`)
+  };
+
   if (loading) return <p>Cargando...</p>;
 
   return (
-    <div>
     <main className="classMain">
-      <header>
-        <h1>Usuarios</h1>
-      </header>
+      <h1>Usuarios</h1>
 
-      {usuarios.map((usuario) => (
-        <article key={usuario.id}>
-          <p><strong>Email:</strong> {usuario.email}</p>
-          <p><strong>Username:</strong> {usuario.username}</p>
-          <p><strong>Contraseña:</strong> {usuario.password}</p>
-        </article>
-      ))}
+      <table className="tabla-usuarios">
+        <thead>
+          <tr>
+            <th>Email</th>
+            <th>Username</th>
+            <th>Contraseña</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          {usuarios.map((usuario) => (
+            <tr key={usuario.id}>
+              <td>{usuario.email}</td>
+              <td>{usuario.username}</td>
+              <td>{usuario.password}</td>
+              <td>
+                <button 
+                  className="btn editar"
+                  onClick={() => editarUsuario(usuario.id)}
+                >
+                  Editar
+                </button>
+
+                <button 
+                  className="btn eliminar"
+                  onClick={() => eliminarUsuario(usuario.id)}
+                >
+                  Eliminar
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </main>
-    </div>
-  )
+  );
 }
 
 export default Usuarios;

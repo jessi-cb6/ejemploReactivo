@@ -4,6 +4,7 @@ import Expresiones from "./expresiones"
 import Pie from "./piePagina"
 import Cuadro from "./Cuadro"
 import Usuarios from "./vistas/usuarios"
+import Carrito from "./Carrito"
 
 
 import Inicio from "./vistas/inicio"
@@ -25,6 +26,7 @@ function App() {
       {vista === "Contactos" && <Contactos />}
       {vista === "Sucursales" && <Sucursales />}
       {vista === "Usuarios" && <Usuarios/>}
+      {vista === "Carrito" && <Carrito/>}
 
       <Expresiones />
       <Cuadro/>
