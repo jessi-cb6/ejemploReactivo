@@ -6,6 +6,11 @@ function Usuarios() {
   const [usuarios, setUsuarios] = useState([]);
   const [loading, setLoading] = useState(true);
 
+
+  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
   useEffect(() => {
     const obtenerUsuarios = async () => {
       try {
@@ -21,6 +26,29 @@ function Usuarios() {
     obtenerUsuarios();
   }, []);
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const nuevoUsuario = { email, username, password };
+
+    try {
+      const response = await api.post("users", nuevoUsuario);
+
+      // Agregamos el nuevo usuario a la tabla
+      setUsuarios([...usuarios, response.data]);
+
+      alert("Usuario registrado con éxito");
+
+      // Limpiar formulario
+      setEmail("");
+      setUsername("");
+      setPassword("");
+
+    } catch (error) {
+      console.error("Error al registrar usuario", error);
+    }
+  };
+
   const eliminarUsuario = async (id) => {
     try {
       await api.delete(`users/${id}`);
@@ -32,7 +60,6 @@ function Usuarios() {
 
   const editarUsuario = (id) => {
     alert("Aquí puedes redirigir a editar usuario con id: " + id);
-    // ejemplo: navigate(`/editar/${id}`)
   };
 
   if (loading) return <p>Cargando...</p>;
@@ -41,40 +68,77 @@ function Usuarios() {
     <main className="classMain">
       <h1>Usuarios</h1>
 
-      <table className="tabla-usuarios">
-        <thead>
-          <tr>
-            <th>Email</th>
-            <th>Username</th>
-            <th>Contraseña</th>
-            <th>Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          {usuarios.map((usuario) => (
-            <tr key={usuario.id}>
-              <td>{usuario.email}</td>
-              <td>{usuario.username}</td>
-              <td>{usuario.password}</td>
-              <td>
-                <button 
-                  className="btn editar"
-                  onClick={() => editarUsuario(usuario.id)}
-                >
-                  Editar
-                </button>
+     
+      <div className="contenedorUsuarios">
 
-                <button 
-                  className="btn eliminar"
-                  onClick={() => eliminarUsuario(usuario.id)}
-                >
-                  Eliminar
-                </button>
-              </td>
+        
+        <form className="formProducto" onSubmit={handleSubmit}>
+          <h2>Registrar Usuario</h2>
+
+          <input
+            type="email"
+            placeholder="Correo electrónico"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+
+          <input
+            type="text"
+            placeholder="Nombre de usuario"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
+          />
+
+          <input
+            type="password"
+            placeholder="Contraseña"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+
+          <button type="submit">Registrar</button>
+        </form>
+
+        
+        <table className="tabla-usuarios">
+          <thead>
+            <tr>
+              <th>Correo electrónico</th>
+              <th>Nombre de usuario</th>
+              <th>Contraseña</th>
+              <th>Acciones</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {usuarios.map((usuario) => (
+              <tr key={usuario.id}>
+                <td>{usuario.email}</td>
+                <td>{usuario.username}</td>
+                <td>{usuario.password}</td>
+                <td>
+                  <button
+                    className="btn editar"
+                    onClick={() => editarUsuario(usuario.id)}
+                  >
+                    Editar
+                  </button>
+
+                  <button
+                    className="btn eliminar"
+                    onClick={() => eliminarUsuario(usuario.id)}
+                  >
+                    Eliminar
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+
+      </div>
     </main>
   );
 }

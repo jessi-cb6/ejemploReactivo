@@ -1,18 +1,67 @@
 .classMain {
-  width: 80%;
+  width: 90%;
   margin: 40px auto;
   font-family: Arial, sans-serif;
+
+  display: flex;              
+  gap: 40px;                
+  align-items: flex-start;   
 }
 
-h1 {
-  text-align: center;
-  margin-bottom: 20px;
+
+
+.formProducto {
+  flex: 1; 
+  background: #ffffff;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
+
+.formProducto h2 {
+  text-align: center;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.formProducto input {
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  font-size: 1rem;
+}
+
+.formProducto input:focus {
+  outline: none;
+  border: 1px solid #3498db;
+}
+
+.formProducto button {
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+  background-color: #3498db;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.formProducto button:hover {
+  background-color: #2980b9;
+}
+
 
 .tabla-usuarios {
+  flex: 2; 
   width: 100%;
   border-collapse: collapse;
   background-color: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
+  border-radius: 12px;
+  overflow: hidden;
 }
 
 .tabla-usuarios th,
@@ -34,6 +83,7 @@ h1 {
 .tabla-usuarios tr:hover {
   background-color: #e6e6e6;
 }
+
 
 
 .btn {
@@ -61,4 +111,12 @@ h1 {
 
 .eliminar:hover {
   background-color: #c0392b;
+}
+
+
+
+@media (max-width: 900px) {
+  .classMain {
+    flex-direction: column; 
+  }
 }
