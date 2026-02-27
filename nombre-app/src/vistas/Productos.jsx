@@ -24,6 +24,21 @@ const obtenerProductos=async ()=>{
 };
 obtenerProductos();
    }, []);
+   const removeUsuario = async (productoId) => {
+  try {
+    const response = await api.delete(`/users/${productoId}`);
+    alert("Usuario eliminado correctamente ");
+    console.log(response.data);
+
+    return true;
+
+  } catch (error) {
+    alert("Error al eliminar usuario ");
+    console.error(error);
+    return false;
+  }
+};
+
    if (loading) return <p>Cargando...</p>;
    return(
       <div>
@@ -37,6 +52,12 @@ obtenerProductos();
          <p>{Producto.title}</p>
          <p>{Producto.price}</p>
          <img src={Producto.image} alt="" />
+         <button
+                    className="btn eliminar"
+                    onClick={() => removeUsuario(Producto.id)}
+                  >
+                    Eliminar
+                  </button>
       </article>
    ))}
 </main>

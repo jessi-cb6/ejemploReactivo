@@ -24,7 +24,6 @@ function RegistarProductos() {
       console.log('Producto registrado:', respuesta.data);
       alert('¡Producto guardado con exito!');
 
-      // limpiar formulario
       setTitle('');
       setPrice('');
       setDescription('');

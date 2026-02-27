@@ -34,12 +34,10 @@ function Usuarios() {
     try {
       const response = await api.post("users", nuevoUsuario);
 
-      // Agregamos el nuevo usuario a la tabla
       setUsuarios([...usuarios, response.data]);
 
       alert("Usuario registrado con éxito");
 
-      // Limpiar formulario
       setEmail("");
       setUsername("");
       setPassword("");
@@ -49,14 +47,20 @@ function Usuarios() {
     }
   };
 
-  const eliminarUsuario = async (id) => {
-    try {
-      await api.delete(`users/${id}`);
-      setUsuarios(usuarios.filter((u) => u.id !== id));
-    } catch (error) {
-      console.error("Error al eliminar usuario", error);
-    }
-  };
+ const removeUsuario = async (usuarioId) => {
+  try {
+    const response = await api.delete(`/users/${usuarioId}`);
+    alert("Usuario eliminado correctamente ");
+    console.log(response.data);
+
+    return true;
+
+  } catch (error) {
+    alert("Error al eliminar usuario ");
+    console.error(error);
+    return false;
+  }
+};
 
   const editarUsuario = (id) => {
     alert("Aquí puedes redirigir a editar usuario con id: " + id);
@@ -128,7 +132,7 @@ function Usuarios() {
 
                   <button
                     className="btn eliminar"
-                    onClick={() => eliminarUsuario(usuario.id)}
+                    onClick={() => removeUsuario(usuario.id)}
                   >
                     Eliminar
                   </button>
@@ -141,6 +145,7 @@ function Usuarios() {
       </div>
     </main>
   );
+
 }
 
 export default Usuarios;
