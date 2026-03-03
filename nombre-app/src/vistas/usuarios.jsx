@@ -1,8 +1,9 @@
 import api from "../services/api";
 import { useEffect, useState } from "react";
 import "./usurios.css";
+import axios from "axios";
 
-function Usuarios() {
+function Usuarios({ usuarioEditando, limpiarSeleccion, onActualizacion }) {
   const [usuarios, setUsuarios] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -12,19 +13,20 @@ function Usuarios() {
   const [password, setPassword] = useState("");
 
   useEffect(() => {
-    const obtenerUsuarios = async () => {
-      try {
-        const response = await api.get("users");
-        setUsuarios(response.data);
-      } catch (error) {
-        console.error("Error al obtener los usuarios", error);
-      } finally {
-        setLoading(false);
-      }
-    };
+    if (usuarioEditando) {
+      setUsername(usuarioEditando.username);
+      setEmail(usuarioEditando.email);
+      setPassword('');
 
-    obtenerUsuarios();
-  }, []);
+    } else {
+      resetForm
+    }
+  }, [usuarioEditando]);
+  const resetForm = () => {
+    setUsername('');
+    setEmail('');
+    setPassword('');
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -32,36 +34,45 @@ function Usuarios() {
     const nuevoUsuario = { email, username, password };
 
     try {
-      const response = await api.post("users", nuevoUsuario);
+      if (usuarioEditando) {
+        const respuesta = await api.put(`/users/${usuarioEditando.id}`, nuevoUsuario);
+        console.log('usuario actualizado:', respuesta.data);
+        alert('¡usuario actalizado con exito!');
+        limpiarSeleccion();
 
-      setUsuarios([...usuarios, response.data]);
 
-      alert("Usuario registrado con éxito");
 
-      setEmail("");
-      setUsername("");
-      setPassword("");
+      } else {
+        const respuesta = await api.post('/users', nuevoUsuario);
+        console.log('usuario registrado:', respuesta.data);
+        alert('¡usuario guardado con exito');
 
+      }
+      resetForm();
+      if (onActualizacion) onActualizacion();
     } catch (error) {
       console.error("Error al registrar usuario", error);
+    }finally{
+      setLoading(false)
     }
   };
 
- const removeUsuario = async (usuarioId) => {
-  try {
-    const response = await api.delete(`/users/${usuarioId}`);
-    alert("Usuario eliminado correctamente ");
-    console.log(response.data);
+  const removeUsuario = async (usuarioId) => {
+    try {
+      console.log("Eliminando usuario con ID:", usuarioId);
 
-    return true;
+      const response = await api.delete(`/users/${usuarioId}`);
+      console.log("Respuesta de la API:", response);
 
-  } catch (error) {
-    alert("Error al eliminar usuario ");
-    console.error(error);
-    return false;
-  }
-};
+      alert("Usuario eliminado correctamente");
 
+      setUsuarios(usuarios.filter(usuario => usuario.id !== usuarioId));
+
+    } catch (error) {
+      console.error("Error al eliminar usuario", error);
+      alert("Error al eliminar usuario");
+    }
+  };
   const editarUsuario = (id) => {
     alert("Aquí puedes redirigir a editar usuario con id: " + id);
   };
@@ -72,10 +83,10 @@ function Usuarios() {
     <main className="classMain">
       <h1>Usuarios</h1>
 
-     
+
       <div className="contenedorUsuarios">
 
-        
+
         <form className="formProducto" onSubmit={handleSubmit}>
           <h2>Registrar Usuario</h2>
 
@@ -106,7 +117,7 @@ function Usuarios() {
           <button type="submit">Registrar</button>
         </form>
 
-        
+
         <table className="tabla-usuarios">
           <thead>
             <tr>
