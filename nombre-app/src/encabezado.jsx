@@ -7,6 +7,7 @@ import wats from "./assets/wats.webp"
 import insta from "./assets/insta.webp"
 import face from "./assets/face.webp"
 import logo from "./assets/logo.png"
+import { useAuth } from "./AuthContext"
 
 function Encabezado({ cambiarVista }) {
   return (
@@ -27,6 +28,7 @@ function Logotipo() {
 }
 
 function Menu({ cambiarVista }) {
+  const {isLoggedIn}=useAuth();
   return (
     <div className='Menu'>
       <ul>
@@ -35,8 +37,16 @@ function Menu({ cambiarVista }) {
         <li onClick={() => cambiarVista("Productos")}>Biblioteca</li>
         <li onClick={() => cambiarVista("Contactos")}>Contactos</li>
         <li onClick={() => cambiarVista("Sucursales")}>Sucursales</li>
+        
+      {isLoggedIn ? (
+    <>
         <li onClick={() => cambiarVista("Usuarios")}>Usuarios</li>
         <li onClick={() => cambiarVista("Carrito")}>Carrito</li>
+        <li>Cerrar Sesión</li>
+    </>
+) : (
+    <li onClick={() => cambiarVista("InicioS")}>Iniciar Sesión</li>
+)}
       </ul>
     </div>
   )

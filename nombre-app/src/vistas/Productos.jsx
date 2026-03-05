@@ -1,70 +1,85 @@
 import "./biblioteca.css"
 import api from "../services/api"
 import { useEffect, useState } from 'react';
-import RegistarProductos from "../RegistrarProductos";
+import Registro from "../RegistrarProductos";
 
+function Productos(){
+    const [productos, setProductos] = useState([]);
+    const [loading, setLoading] = useState(true);
+    // 1. Estado para el producto que se va a editar
+    const [productoSeleccionado, setProductoSeleccionado] = useState(null);
 
+    const obtenerProductos = async () => {
+        try {
+            const response = await api.get("/products");
+            setProductos(response.data);
+        } catch (error) {
+            console.error("Error al obtener productos:", error);
+        } finally {
+            setLoading(false);
+        }
+    };
 
+    useEffect(() => {
+        obtenerProductos();
+    }, []);
 
-function Productos() {
-   const [Productos, setProductos]=useState([]);
-   const [loading, setLoading]=useState(true);
+    const removeProducto = async (productoId) => {
+        if (!window.confirm("¿Eliminar este producto?")) return;
+        try {
+            // Corregido: ruta de products
+            await api.delete(`/products/${productoId}`);
+            alert("Producto eliminado correctamente");
+            obtenerProductos(); // Recargar lista
+        } catch (error) {
+            alert("Error al eliminar producto");
+            console.error(error); 
+        }
+    };
 
-   useEffect(()=>{
-const obtenerProductos=async ()=>{
-   try{
-      const response =await api.get("products");
-      setProductos(response.data);
-   }catch(error){
-      console.error("error al obtener los productos", error);
+    if (loading) return <p>Cargando.....</p>
 
-   }finally{
-      setLoading(false);
-   }
-};
-obtenerProductos();
-   }, []);
-   const removeUsuario = async (productoId) => {
-  try {
-    const response = await api.delete(`/users/${productoId}`);
-    alert("Usuario eliminado correctamente ");
-    console.log(response.data);
+    return (
+        <div className='dos'>
+            <main className='Main'>
+                <header>
+                    <h1>Productos</h1>
+                </header>
 
-    return true;
+                {/* 2. Pasamos las props al componente Registro */}
+                <Registro 
+                    productoE={productoSeleccionado} 
+                    limpiarSeleccion={() => setProductoSeleccionado(null)} 
+                    onActualizacion={obtenerProductos} 
+                />
 
-  } catch (error) {
-    alert("Error al eliminar usuario ");
-    console.error(error);
-    return false;
-  }
-};
+                <div className='cuadro'>
+                    {productos.map((producto) => (
+                        <article key={producto.id}>
+                            <div className='tarjetas'>
+                                <h2>{producto.title}</h2>
+                                <img src={producto.image} alt={producto.title} />
+                                <h3>${producto.price}</h3>
+                                
+                                {/* 3. Botón para Editar */}
+                                <button 
+                                    onClick={() => setProductoSeleccionado(producto)}
+                                    style={{ backgroundColor: '#ffc107', marginBottom: '5px' }}
+                                >
+                                    EDITAR
+                                </button>
 
-   if (loading) return <p>Cargando...</p>;
-   return(
-      <div>
-<main className="classMain">
-   <header>
-      <h1>Nuestro catalogo</h1>
-   </header>
-   <RegistarProductos/>
-   {Productos.map((Producto)=>(
-      <article key={Producto.id}>
-         <p>{Producto.title}</p>
-         <p>{Producto.price}</p>
-         <img src={Producto.image} alt="" />
-         <button
-                    className="btn eliminar"
-                    onClick={() => removeUsuario(Producto.id)}
-                  >
-                    Eliminar
-                  </button>
-      </article>
-   ))}
-</main>
-
-      </div>
-   )
- 
+                                <button onClick={() => removeProducto(producto.id)}>
+                                    ELIMINAR
+                                </button>
+                            </div>
+                        </article>
+                    ))}
+                </div>
+            </main>
+        </div>
+    );
 }
 
-export default Productos
+export default Productos;
+
