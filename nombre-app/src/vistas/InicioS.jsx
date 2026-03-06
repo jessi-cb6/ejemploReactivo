@@ -1,50 +1,58 @@
 import { useState } from "react";
-import "./inicioS.css"
-function InicioS(){
+import axios from "axios";
+import api from "../services/api";
 
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
 
-    const handleSubmit = (e) => {
+const InicioS =({cheVista})=>{
+
+    const[username, setUsername]=useState('');
+    const[password, setPassword]=useState('');
+    
+    const handleSubmit = async (e) =>{
         e.preventDefault();
-
-        console.log("Email:", email);
-        console.log("Password:", password);
-
-        alert("Intentando iniciar sesión");
+        const credenciales ={username, password};
+        try{
+            const respuesta=await api.post('/auth/login/', credenciales);
+            if(respuesta.data.token){
+                login (respuesta.data.token);
+                alert('Autenticacion Autorizada');
+                console.log(respuesta.data.token)
+                cheVista('Usuarios');
+            }else{
+                alert('Credenciales invalidas');    
+            }
+        }catch(error){
+            alert('Error:',error);
+            console.error("Error:",error);
+        }
     };
 
-    return(
-        <div className="login-container">
-
-            <form className="login-form" onSubmit={handleSubmit}>
-
-                <h2>Iniciar Sesión</h2>
-
-                <input
-                    type="email"
-                    placeholder="Correo electrónico"
-                    value={email}
-                    onChange={(e)=>setEmail(e.target.value)}
-                    required
+    return (
+        <div>
+            <form className="form" onSubmit={handleSubmit}>
+                
+                <input 
+                    type="text" 
+                    placeholder="ejemplo@correo"
+                    value={username}
+                    onChange={(e)=>setUsername(e.target.value)}
                 />
 
-                <input
-                    type="password"
+                <input 
+                    type="password" 
                     placeholder="Contraseña"
                     value={password}
                     onChange={(e)=>setPassword(e.target.value)}
-                    required
                 />
 
                 <button type="submit">
-                    Ingresar
+                    Entrar
                 </button>
 
             </form>
-
         </div>
-    )
+    );
 }
 
-export default InicioS
+
+export default InicioS;
