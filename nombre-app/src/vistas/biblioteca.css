@@ -1,106 +1,123 @@
-.classMain {
-  padding: 40px;
-  background-color: #f4f6f9;
-  min-height: 100vh;
+/* Fondo general */
+.dos {
+    display: flex;
+    justify-content: center;
+    padding: 25px;
+    background: linear-gradient(135deg, #f5f7fa, #e4ecf7);
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
 }
 
-.classMain header {
-  text-align: center;
-  margin-bottom: 40px;
+/* Contenedor principal */
+.Main {
+    width: 100%;
+    max-width: 1200px;
 }
 
-.classMain h1 {
-  font-size: 2.2rem;
-  color: #333;
+/* Título */
+header {
+    text-align: center;
+    margin-bottom: 20px;
 }
 
-
-.classMain {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 25px;
+header h1 {
+    font-size: 2rem;
+    color: #2c3e50;
 }
 
-
-.classMain article {
-  background: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  padding: 20px;
-  text-align: center;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+/* GRID con separación de cards */
+.cuadro {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 40px; /* 🔥 separación entre cards */
+    padding: 10px;
 }
 
-.classMain article:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+/* CARD */
+.tarjetas {
+    background: #fff;
+    border-radius: 15px;
+    padding: 12px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+    overflow: hidden;
+    border: 1px solid #eee;
 }
 
-.classMain article img {
-  width: 100%;
-  height: 200px;
-  object-fit: contain;
-  margin: 15px 0;
+.tarjetas:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
 }
 
-.classMain article p:first-of-type {
-  font-weight: 600;
-  color: #333;
-  margin-bottom: 10px;
+/* IMAGEN */
+.tarjetas img {
+    width: 100%;
+    height: 110px;
+    object-fit: contain;
+    background: #f8f8f8;
+    border-radius: 10px;
+    padding: 5px;
 }
 
-.classMain article p:last-of-type {
-  color: #2e7d32;
-  font-weight: bold;
-  font-size: 1.1rem;
+/* TITULO */
+.tarjetas h2 {
+    font-size: 0.9rem;
+    margin: 8px 0;
+    color: #333;
 }
 
-.formProducto {
-  grid-column: 1 / -1; 
-  background: #ffffff;
-  padding: 25px;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  max-width: 500px;
-  margin: 0 auto 30px auto;
+/* PRECIO */
+.tarjetas h3 {
+    font-size: 0.85rem;
+    color: #27ae60;
+    margin-bottom: 10px;
 }
 
-.formProducto h2 {
-  text-align: center;
-  margin-bottom: 10px;
-  color: #333;
+/* BOTONES */
+.tarjetas button {
+    width: 100%;
+    padding: 7px;
+    margin-top: 6px;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
 }
 
-.formProducto input {
-  padding: 12px;
-  border-radius: 8px;
-  border: 1px solid #ddd;
-  font-size: 1rem;
-  transition: border 0.2s ease, box-shadow 0.2s ease;
+/* EDITAR */
+.tarjetas button:first-of-type {
+    background: #f1c40f;
+    color: #000;
 }
 
-.formProducto input:focus {
-  outline: none;
-  border: 1px solid #2e7d32;
-  box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.15);
+.tarjetas button:first-of-type:hover {
+    background: #d4ac0d;
 }
 
-.formProducto button {
-  padding: 12px;
-  border-radius: 8px;
-  border: none;
-  background-color: #2e7d32;
-  color: white;
-  font-weight: bold;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color 0.2s ease, transform 0.1s ease;
+/* ELIMINAR */
+.tarjetas button:last-of-type {
+    background: #e74c3c;
+    color: #fff;
 }
 
-.formProducto button:hover {
-  background-color: #1b5e20;
-  transform: translateY(-2px);
+.tarjetas button:last-of-type:hover {
+    background: #c0392b;
+}
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+    header h1 {
+        font-size: 1.5rem;
+    }
+
+    .tarjetas img {
+        height: 90px;
+    }
+
+    .cuadro {
+        gap: 25px;
+    }
 }

@@ -11,7 +11,7 @@ function Productos(){
 
     const obtenerProductos = async () => {
         try {
-            const response = await api.get("/products");
+            const response = await api.get("/productos");
             setProductos(response.data);
         } catch (error) {
             console.error("Error al obtener productos:", error);
@@ -28,7 +28,7 @@ function Productos(){
         if (!window.confirm("¿Eliminar este producto?")) return;
         try {
             // Corregido: ruta de products
-            await api.delete(`/products/${productoId}`);
+            await api.delete(`/productos/${productoId}`);
             alert("Producto eliminado correctamente");
             obtenerProductos(); // Recargar lista
         } catch (error) {
@@ -57,9 +57,8 @@ function Productos(){
                     {productos.map((producto) => (
                         <article key={producto.id}>
                             <div className='tarjetas'>
-                                <h2>{producto.title}</h2>
-                                <img src={producto.image} alt={producto.title} />
-                                <h3>${producto.price}</h3>
+                                <h2>{producto.nombre}</h2>
+                                <h3>${producto.precio}</h3>
                                 
                                 {/* 3. Botón para Editar */}
                                 <button 

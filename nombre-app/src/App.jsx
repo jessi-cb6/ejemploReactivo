@@ -32,7 +32,6 @@ function App() {
       {vista === "Carrito" && <Carrito/>}
       {vista === "InicioS" && <InicioS/>}
 
-      <Expresiones />
       <Cuadro/>
       <Pie />
     </div>
