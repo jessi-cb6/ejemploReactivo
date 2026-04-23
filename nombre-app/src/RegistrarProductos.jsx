@@ -5,73 +5,85 @@ import './RegistrarProductos.css';
 function Registro({ productoE, limpiarSeleccion, onActualizacion }) {
 
     const [nombre, setNombre] = useState('');
-    const [precio, setPrecio] = useState('');
     const [descripcion, setDescripcion] = useState('');
-    const [id_categoria, setIdCategoria] = useState('');
+    const [precio, setPrecio] = useState('');
     const [stock, setStock] = useState('');
+    const [idCategoria, setIdCategoria] = useState('');
 
     useEffect(() => {
+
         if (productoE) {
+
             setNombre(productoE.nombre || '');
-            setPrecio(productoE.precio || '');
             setDescripcion(productoE.descripcion || '');
-            setIdCategoria(productoE.id_categoria || '');
+            setPrecio(productoE.precio || '');
             setStock(productoE.stock || '');
+            setIdCategoria(productoE.id_categoria || '');
+
         } else {
             resetForm();
         }
+
     }, [productoE]);
 
     const resetForm = () => {
         setNombre('');
-        setPrecio('');
         setDescripcion('');
-        setIdCategoria('');
+        setPrecio('');
         setStock('');
+        setIdCategoria('');
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         const nuevoProducto = {
-            nombre: nombre,
-            descripcion: descripcion,
-            precio: Number(precio),          // 👈 importante convertir a número
-            stock: Number(stock),            // 👈 importante convertir a número
-            id_categoria: Number(id_categoria) // 👈 importante
+            nombre,
+            descripcion,
+            precio,
+            stock,
+            id_categoria: idCategoria
         };
 
         try {
+
             if (productoE) {
-                await api.put(`/productos/${productoE.id}`, nuevoProducto);
-                alert('Producto actualizado con éxito');
+
+                await api.put(`/producto/${productoE.id}`, nuevoProducto);
+                alert('Producto actualizado');
+
                 if (limpiarSeleccion) limpiarSeleccion();
+
             } else {
+
                 await api.post('/productos', nuevoProducto);
-                alert('Producto guardado con éxito');
+                alert('Producto creado');
             }
 
             resetForm();
+
             if (onActualizacion) onActualizacion();
 
         } catch (error) {
-            console.error("Error completo:", error.response?.data || error.message);
-            alert('Error al procesar producto');
+            console.error(error);
+            alert('Error en la operación');
         }
     };
 
     return (
         <div className="main">
-            <h2>{productoE ? 'Editar Producto' : 'Registrar Producto'}</h2>
 
-            <form className='form' onSubmit={handleSubmit}>
+            <h2>
+                {productoE ? 'Editar Producto' : 'Registrar Producto'}
+            </h2>
+
+            <form className="form" onSubmit={handleSubmit}>
 
                 <input
                     type="text"
                     placeholder="Nombre"
                     value={nombre}
                     onChange={(e) => setNombre(e.target.value)}
-                    required
                 />
 
                 <input
@@ -86,7 +98,6 @@ function Registro({ productoE, limpiarSeleccion, onActualizacion }) {
                     placeholder="Precio"
                     value={precio}
                     onChange={(e) => setPrecio(e.target.value)}
-                    required
                 />
 
                 <input
@@ -99,15 +110,16 @@ function Registro({ productoE, limpiarSeleccion, onActualizacion }) {
                 <input
                     type="number"
                     placeholder="ID Categoría"
-                    value={id_categoria}
+                    value={idCategoria}
                     onChange={(e) => setIdCategoria(e.target.value)}
                 />
 
                 <button type="submit">
-                    {productoE ? 'Actualizar Producto' : 'Registrar Producto'}
+                    {productoE ? 'Actualizar' : 'Registrar'}
                 </button>
 
             </form>
+
         </div>
     );
 }

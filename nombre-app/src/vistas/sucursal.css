@@ -1,32 +1,64 @@
+/* ====== Contenedor principal ====== */
 .sucursales-contenedor {
-    max-width: 600px;       
-    margin: 40px auto;    
-    padding: 20px;
-    background-color: #16660c; 
-    color: white;
-    border-radius: 10px;    
+  background: linear-gradient(180deg, #fdfbff, #f3edf7);
+  min-height: 100vh;
+  padding: 3rem 2rem;
+  color: #4a4a4a;
+  font-family: "Poppins", sans-serif;
 }
 
+/* ====== Título ====== */
 .titulo-sucursales {
-    font-size: 28px;
-    margin-bottom: 15px;
+  text-align: center;
+  font-size: 2.5rem;
+  color: #b388eb; /* morado pastel */
+  margin-bottom: 1.5rem;
 }
 
+/* ====== Texto introductorio ====== */
 .texto-sucursales {
-    font-size: 16px;
-    margin-bottom: 20px;
-    line-height: 1.5;
+  max-width: 700px;
+  margin: 0 auto 2rem auto;
+  text-align: center;
+  line-height: 1.8;
+  color: #6d6d6d; /* gris elegante */
+  background: rgba(255, 255, 255, 0.7);
+  padding: 1.5rem;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
 
+/* ====== Lista de sucursales ====== */
 .lista-sucursales {
-    list-style: none;       
-    padding: 0;
-    font-size: 16px;
+  list-style: none;
+  padding: 0;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 .lista-sucursales li {
-    margin-bottom: 10px;
-    background: #69bd1a;
-    padding: 10px;
-    border-radius: 6px;
+  background: #ffffff;
+  margin: 1rem 0;
+  padding: 1.2rem;
+  border-radius: 15px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.lista-sucursales li:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+.lista-sucursales strong {
+  color: #d291bc; /* rosita pastel */
+  font-weight: bold;
+}
+
+/* ====== Estilo para el mapa ====== */
+.lista-sucursales li > div {
+  margin-top: 1rem;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }

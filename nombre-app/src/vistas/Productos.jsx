@@ -1,17 +1,20 @@
-import "./biblioteca.css"
-import api from "../services/api"
 import { useEffect, useState } from 'react';
-import Registro from "../RegistrarProductos";
+import { useAuth } from '../AuthContext';
+import api from '../services/api';
+import Registro from '../RegistrarProductos';
+import './biblioteca.css'
 
-function Productos(){
+function Productos() {
+
+    const { user } = useAuth();
+
     const [productos, setProductos] = useState([]);
     const [loading, setLoading] = useState(true);
-    // 1. Estado para el producto que se va a editar
     const [productoSeleccionado, setProductoSeleccionado] = useState(null);
 
     const obtenerProductos = async () => {
         try {
-            const response = await api.get("/productos");
+            const response = await api.get('/productos');
             setProductos(response.data);
         } catch (error) {
             console.error("Error al obtener productos:", error);
@@ -25,60 +28,121 @@ function Productos(){
     }, []);
 
     const removeProducto = async (productoId) => {
-        if (!window.confirm("¿Eliminar este producto?")) return;
+
+        if (user?.rol !== 'admin') return;
+
         try {
-            // Corregido: ruta de products
-            await api.delete(`/productos/${productoId}`);
-            alert("Producto eliminado correctamente");
-            obtenerProductos(); // Recargar lista
+            await api.delete(`/producto/${productoId}`);
+            alert("Producto eliminado");
+            obtenerProductos();
         } catch (error) {
-            alert("Error al eliminar producto");
-            console.error(error); 
+            alert("Error al eliminar");
+            console.error(error);
         }
     };
 
-    if (loading) return <p>Cargando.....</p>
+    const agregarCarrito = async (producto) => {
+
+        if (!user) return;
+
+        try {
+
+            const token = localStorage.getItem('token');
+
+            const carrito = await api.post(
+                '/carritos',
+                {
+                    id_usuario: user.id,
+                    fecha_creacion: new Date()
+                },
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                }
+            );
+
+            await api.post(
+                '/detalles',
+                {
+                    id_carrito: carrito.data.id,
+                    id_producto: producto.id,
+                    cantidad: 1,
+                    precio_unitario: producto.precio
+                },
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                }
+            );
+
+            alert('Producto agregado al carrito');
+
+        } catch (error) {
+            console.error(error);
+            alert('Error al agregar');
+        }
+    };
+
+    if (loading) return <p>Cargando...</p>;
 
     return (
         <div className='dos'>
             <main className='Main'>
+
                 <header>
                     <h1>Productos</h1>
                 </header>
 
-                {/* 2. Pasamos las props al componente Registro */}
-                <Registro 
-                    productoE={productoSeleccionado} 
-                    limpiarSeleccion={() => setProductoSeleccionado(null)} 
-                    onActualizacion={obtenerProductos} 
-                />
+                {user?.rol === 'admin' && (
+                    <Registro
+                        productoE={productoSeleccionado}
+                        limpiarSeleccion={() => setProductoSeleccionado(null)}
+                        onActualizacion={obtenerProductos}
+                    />
+                )}
 
                 <div className='cuadro'>
+
                     {productos.map((producto) => (
                         <article key={producto.id}>
-                            <div className='tarjetas'>
-                                <h2>{producto.nombre}</h2>
-                                <h3>${producto.precio}</h3>
-                                
-                                {/* 3. Botón para Editar */}
-                                <button 
-                                    onClick={() => setProductoSeleccionado(producto)}
-                                    style={{ backgroundColor: '#ffc107', marginBottom: '5px' }}
-                                >
-                                    EDITAR
-                                </button>
 
-                                <button onClick={() => removeProducto(producto.id)}>
-                                    ELIMINAR
-                                </button>
+                            <div className='tarjetas'>
+
+                                <h2>{producto.nombre}</h2>
+                                <p>{producto.descripcion}</p>
+                                <h3>$ {producto.precio}</h3>
+                                <p>Stock: {producto.stock}</p>
+
+                                {user?.rol === 'cliente' && (
+                                    <button onClick={() => agregarCarrito(producto)}>
+                                        AGREGAR AL CARRITO
+                                    </button>
+                                )}
+
+                                {user?.rol === 'admin' && (
+                                    <>
+                                        <button onClick={() => setProductoSeleccionado(producto)}>
+                                            EDITAR
+                                        </button>
+
+                                        <button onClick={() => removeProducto(producto.id)}>
+                                            ELIMINAR
+                                        </button>
+                                    </>
+                                )}
+
                             </div>
+
                         </article>
                     ))}
+
                 </div>
+
             </main>
         </div>
     );
 }
 
 export default Productos;
-

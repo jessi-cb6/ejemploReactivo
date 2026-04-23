@@ -1,77 +1,71 @@
-import { useEffect, useState } from "react"
- import api from "./services/api"
- import './carrito.css'
- import RegistroCartas from "./RegistrarCarta";
- 
- function Carrito(){
-    const[carts,setCarts]=useState([]);
-    const[loading,setLoading]=useState(true);
+import { useEffect, useState } from "react";
+import api from "./services/api";
+import './carrito.css';
 
-    useEffect(()=>{
-        const obtenerCarts=async ()=>{
-            try{
-                const response= await api.get("/carts");
-                setCarts(response.data);
-            }catch(error){
-                console.error("Error al obtener cart:",error);
-            }finally{
-                setLoading(false);
-            }
+function Carrito() {
 
-        };
-        obtenerCarts();
-    },[]);
-    const removeCarrito = async (carritoId) => {
-  try {
-    const response = await api.delete(`/users/${carritoId}`);
-    alert("Usuario eliminado correctamente ");
-    console.log(response.data);
+    const [detalles, setDetalles] = useState([]);
+    const [loading, setLoading] = useState(true);
 
-    return true;
+    const obtenerDatos = async () => {
+        try {
 
-  } catch (error) {
-    alert("Error al eliminar usuario ");
-    console.error(error);
-    return false;
-  }
-};
+            const response = await api.get('/detalles');
+            setDetalles(response.data);
 
-    if (loading) return <p>Cargando....</p>
-    return(
-        <div>
-            <main className="Main">
-                <header>
-                    <h1>Carrito</h1>
+        } catch (error) {
+            console.error(error);
 
-                </header>
-                <RegistroCartas/>
-                
-                <div className="carts">
-                    {carts.map((cart)=>(
-                        <article key={cart.id}>
-                                <h2>Pedido No:{cart.id}</h2>
-                                <h2>Usuario:{cart.userId}</h2>
-                                <div className="cosas">
-                               
-                                {cart.products.map((producto)=>(
-                                    <article >
-                                        <h2>Producto:{producto.productId}</h2>
-                                        <h2>Cantidad:{producto.quantity}</h2>
-                                        <button
-                    className="btn eliminar"
-                    onClick={() => removeCarrito(cart.id)}
-                  >
-                    Eliminar
-                  </button>
-                                    </article>
-                                ))}
-                                
-                            </div>
-                        </article>
-                    ))}
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    useEffect(() => {
+        obtenerDatos();
+    }, []);
+
+    const eliminar = async (id) => {
+        try {
+            await api.delete(`/detalle/${id}`);
+            obtenerDatos();
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    if (loading) return <p>Cargando...</p>;
+
+    return (
+        <main className="Main">
+
+            <h1>Mi Carrito</h1>
+
+            {detalles.map((item) => (
+
+                <div key={item.id} className="carts">
+
+                    <h2>{item.producto?.nombre}</h2>
+
+                    <p>Cantidad: {item.cantidad}</p>
+
+                    <p>Precio Unitario: $ {item.precio_unitario}</p>
+
+                    <p>
+                        Total: $
+                        {item.cantidad * item.precio_unitario}
+                    </p>
+
+                    <button onClick={() => eliminar(item.id)}>
+                        Quitar
+                    </button>
+
                 </div>
-            </main>
-        </div>
-    )
- }
- export default Carrito
+
+            ))}
+
+        </main>
+    );
+}
+
+export default Carrito;

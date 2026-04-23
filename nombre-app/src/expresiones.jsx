@@ -1,4 +1,3 @@
-import "./expresiones.css"
 import tarjet1 from "./assets/tarjet1.jpg"
 import tarjet2 from "./assets/tarjet2.jpg"
 import tarjet3 from "./assets/tarjet3.jpg"

@@ -1,4 +1,3 @@
-
 import Clima from "./Clima"
 import PropTypes from "prop-types"
 import "./encabezado.css"
@@ -28,25 +27,42 @@ function Logotipo() {
 }
 
 function Menu({ cambiarVista }) {
-  const {isLoggedIn}=useAuth();
+  const { user, logout } = useAuth();
+
+  const token = user?.token;
+  const rol = user?.rol;
+
   return (
     <div className='Menu'>
       <ul>
         <li onClick={() => cambiarVista("Inicio")}>Inicio</li>
         <li onClick={() => cambiarVista("AcercaDe")}>Acerca de</li>
-        <li onClick={() => cambiarVista("Productos")}>Biblioteca</li>
+        <li onClick={() => cambiarVista("Productos")}>Productos</li>
         <li onClick={() => cambiarVista("Contactos")}>Contactos</li>
         <li onClick={() => cambiarVista("Sucursales")}>Sucursales</li>
-        
-      {isLoggedIn ? (
-    <>
-        <li onClick={() => cambiarVista("Usuarios")}>Usuarios</li>
-        <li onClick={() => cambiarVista("Carrito")}>Carrito</li>
-        <li>Cerrar Sesión</li>
-    </>
-) : (
-    <li onClick={() => cambiarVista("InicioS")}>Iniciar Sesión</li>
-)}
+
+        {token ? (
+          <>
+            <li onClick={() => cambiarVista("Usuarios")}>
+  Usuarios
+</li>
+
+            <li onClick={() => cambiarVista("Carrito")}>Carrito</li>
+
+            <li
+              onClick={() => {
+                logout();
+                cambiarVista("Inicio");
+              }}
+            >
+              Cerrar Sesión
+            </li>
+          </>
+        ) : (
+          <li onClick={() => cambiarVista("InicioS")}>
+            Iniciar Sesión
+          </li>
+        )}
       </ul>
     </div>
   )
@@ -61,7 +77,6 @@ function Redes() {
       <img src={yutu} alt="" />
       <Clima />
     </div>
-
   )
 }
 

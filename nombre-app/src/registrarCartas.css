@@ -1,0 +1,124 @@
+/* Fondo general */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #4e8d23, #2f5d15);
+    min-height: 100vh;
+}
+
+/* Contenedor principal */
+.contenedorForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+}
+
+/* Título */
+.contenedorForm h2 {
+    color: #fff;
+    margin-bottom: 20px;
+    font-size: 28px;
+}
+
+/* Formulario */
+.formProducto {
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    width: 320px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Inputs */
+.formProducto input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+/* Focus inputs */
+.formProducto input:focus {
+    border-color: #4e8d23;
+    outline: none;
+    box-shadow: 0 0 6px rgba(78, 141, 35, 0.5);
+}
+
+/* Botón */
+.formProducto button {
+    background: #4e8d23;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* Hover botón */
+.formProducto button:hover {
+    background: #3a6f1a;
+    transform: scale(1.05);
+}
+
+/* CONTENEDOR DE CARDS */
+.contenedorCards {
+    margin-top: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+/* CARD */
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    width: 260px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+/* Hover card */
+.card:hover {
+    transform: translateY(-8px) scale(1.02);
+}
+
+/* Título card */
+.card h3 {
+    margin-bottom: 10px;
+    color: #4e8d23;
+    border-bottom: 2px solid #4e8d23;
+    padding-bottom: 5px;
+}
+
+/* Texto */
+.card p {
+    margin: 6px 0;
+    font-size: 14px;
+    color: #333;
+}
+
+/* Etiquetas */
+.card strong {
+    color: #000;
+}
+
+/* Responsive */
+@media (max-width: 500px) {
+    .formProducto {
+        width: 90%;
+    }
+
+    .card {
+        width: 90%;
+    }
+}

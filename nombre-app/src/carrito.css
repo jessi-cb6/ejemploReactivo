@@ -1,66 +1,61 @@
+/* ====== Contenedor principal ====== */
 .Main {
-    padding: 60px 20px;
-    text-align: center;
-    background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
-    min-height: 100vh;
-    font-family: 'Segoe UI', sans-serif;
-    color: #030303;
+  background: linear-gradient(180deg, #fdfbff, #f3edf7);
+  min-height: 100vh;
+  padding: 2rem;
+  font-family: "Poppins", sans-serif;
+  color: #4a4a4a;
 }
 
+/* ====== Título ====== */
+.Main h1 {
+  text-align: center;
+  font-size: 2.5rem;
+  color: #b388eb; /* morado pastel */
+  margin-bottom: 2rem;
+}
+
+/* ====== Tarjetas del carrito ====== */
 .carts {
-    display: flex;
-    flex-direction: column;
-    gap: 50px;
-    align-items: center;
+  background: #ffffff;
+  border-radius: 15px;
+  padding: 1.5rem;
+  margin: 1.5rem auto;
+  max-width: 600px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.carts article {
-    background: rgba(248, 248, 248, 0.596);
-    padding: 25px;
-    border-radius: 20px;
-    width: 80%;
-    max-width: 900px;
-    box-shadow: 0 10px 25px rgba(0, 128, 0, 0.15);
-    transition: all 0.3s ease;
+.carts:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
 }
 
-.carts article:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 15px 35px rgba(43, 43, 43, 0.25);
+.carts h2 {
+  color: #d291bc; /* rosita pastel */
+  margin-bottom: 0.5rem;
 }
 
-.carts article > h2 {
-    margin-bottom: 15px;
-    font-size: 26px;
-    color: #6a806b;
+.carts p {
+  color: #6d6d6d; /* gris elegante */
+  margin: 0.5rem 0;
+  font-size: 1rem;
 }
 
-.cosas {
-    margin-top: 15px;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
-    gap: 25px;
+/* ====== Botón quitar ====== */
+.carts button {
+  margin-top: 1rem;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 25px;
+  background: linear-gradient(90deg, #f48fb1, #ce93d8); /* rosita a morado pastel */
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s, background 0.3s;
 }
 
-.cosas article {
-    background: #40694a1a;
-    padding: 20px;
-    border-radius: 15px;
-    border: 2px solid #a5d6a7;
-    box-shadow: 0 5px 15px rgba(0, 128, 0, 0.08);
-    transition: all 0.3s ease;
-    cursor: pointer;
-}
-
-.cosas article:hover {
-    background: #e8f5e9;
-    transform: scale(1.07);
-    border-color: #0e8d15;
-}
-
-.cosas h2 {
-    font-size: 16px;
-    margin: 10px 0;
-    font-weight: 600;
-    color: #1b5e20;
+.carts button:hover {
+  transform: scale(1.05);
+  background: linear-gradient(90deg, #ce93d8, #f48fb1);
 }

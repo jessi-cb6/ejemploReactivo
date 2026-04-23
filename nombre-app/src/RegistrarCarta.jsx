@@ -1,71 +1,76 @@
-import React, {useState} from "react";
-import axios from "axios";
+import React, { useState } from "react";
 import api from "./services/api";
-import './RegistrarProductos.css' 
+import './registrarCartas.css';
 
-function RegistroCartas(){
+function RegistroCartas() {
+    const [fecha_creacion, setFechaCreacion] = useState('');
+    const [carritos, setCarritos] = useState([]);
 
-    const [id, setId]= useState('');
-    const [userId, setUserId]= useState('');
-    const[date,setDate]=useState('');
-    const [productId, setProductoId]= useState('');
-    const [quantity, setQuiantity]= useState('');
-
-    const handleSubmit =async (e)=>{
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        const nuevoProducto={id, userId,date, productId, quantity};
-        try{
-            const respuesta = await api.post('/carts', nuevoCart);
-            console.log('Carrito registrado:' ,respuesta.data);
-            alert('Carrito guardado');
-        } catch(error){
-            console.error('Error al registrar:', error);
+
+        const token = localStorage.getItem('token');
+
+        // 🔥 VALIDACIÓN CLAVE
+        if (!token) {
+            alert("Debes iniciar sesión primero");
+            return;
         }
-    }
 
-    return(
+        const nuevoCart = {
+            fecha_creacion: fecha_creacion
+        };
+
+        try {
+            const respuesta = await api.post('/carritos', nuevoCart, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+
+            console.log('Carrito registrado:', respuesta.data);
+
+            setCarritos([...carritos, respuesta.data]);
+
+            alert('Carrito guardado con éxito');
+
+            // Limpiar formulario
+            setFechaCreacion('');
+
+        } catch (error) {
+            console.error('Error al registrar:', error.response?.data || error.message);
+            alert('Error al guardar carrito');
+        }
+    };
+
+    return (
         <div className="contenedorForm">
-            <h2>Registrar Producto</h2>
-            <form  className='formProducto' onSubmit={handleSubmit}>
-                <input 
-                type="number" 
-                placeholder="Id" 
-                value={id} 
-                onChange={(e)=> setId(e.target.value)} 
-                />
+            <h2>Registrar Carrito</h2>
+
+            <form className='formProducto' onSubmit={handleSubmit}>
 
                 <input 
-                type="number" 
-                placeholder="UserId" 
-                value={userId} 
-                onChange={(e)=> setUserId(e.target.value)} 
+                    type="date" 
+                    value={fecha_creacion} 
+                    onChange={(e) => setFechaCreacion(e.target.value)} 
+                    required 
                 />
 
-                <input 
-                type="date" 
-                placeholder="Date" 
-                value={date} 
-                onChange={(e)=> setDate(e.target.value)} 
-                />
-
-                <input 
-                type="number" 
-                placeholder="ProductId" 
-                value={productId} 
-                onChange={(e)=> setProductoId(e.target.value)} 
-                />
-
-                <input 
-                type="number" 
-                placeholder="Cantidad" 
-                value={quantity} 
-                onChange={(e)=> setQuiantity(e.target.value)} 
-                />
                 <button type="submit">Registrar</button>
-
             </form>
-        </div>
-    )
 
+            {/* CARDS */}
+            <div className="contenedorCards">
+                {carritos.map((cart, index) => (
+                    <div className="card" key={index}>
+                        <h3>Carrito #{cart.id}</h3>
+                        <p><strong>ID Usuario:</strong> {cart.id_usuario}</p>
+                        <p><strong>Fecha:</strong> {cart.fecha_creacion}</p>
+                    </div>
+                ))}
+            </div>
+        </div>
+    );
 }
-export default RegistroCartas
+
+export default RegistroCartas;

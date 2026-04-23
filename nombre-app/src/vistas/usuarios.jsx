@@ -1,18 +1,26 @@
-import api from "../services/api";
-import { useEffect, useState } from "react";
-import "./usurios.css";
-import axios from "axios";
-import RegistroU from "../RegistarUsuarios";
+import { useEffect, useState } from 'react';
+import { useAuth } from '../AuthContext';
+import api from '../services/api';
+import './usurios.css'
 
+import RegistroU from '../RegistarUsuarios';
 function Usuarios() {
+
+    const { user } = useAuth();
+
     const [usuarios, setUsuarios] = useState([]);
     const [loading, setLoading] = useState(true);
     const [usuarioSeleccionado, setUsuarioS] = useState(null);
 
     const obtenerUsuarios = async () => {
         try {
-            const response = await api.get("/users");
-            setUsuarios(response.data);
+            if (user?.rol === 'admin') {
+                const response = await api.get('/usuarios');
+                setUsuarios(response.data);
+            } else {
+                const response = await api.get(`/usuario/${user.id}`);
+                setUsuarios([response.data]);
+            }
         } catch (error) {
             console.error("Error al obtener usuarios:", error);
         } finally {
@@ -21,75 +29,83 @@ function Usuarios() {
     };
 
     useEffect(() => {
-        obtenerUsuarios();
-    }, []);
+        if (user) {
+            obtenerUsuarios();
+        }
+    }, [user]);
 
     const removeUsuario = async (usuarioId) => {
-        if (!window.confirm("¿Estás seguro de eliminar este usuario?")) return;
+        if (user?.rol !== 'admin') return;
+        if (!window.confirm("¿Eliminar usuario?")) return;
+
         try {
-            await api.delete(`/users/${usuarioId}`);
-            alert("Usuario eliminado correctamente");
-            obtenerUsuarios(); 
+            await api.delete(`/usuario/${usuarioId}`);
+            alert("Usuario eliminado");
+            obtenerUsuarios();
         } catch (error) {
-            alert("Error al eliminar usuario");
+            alert("Error al eliminar");
         }
     };
 
-    if (loading) return <p>Cargando.....</p>;
+    if (loading) return <p>Cargando...</p>;
 
     return (
         <div className='main'>
-            
-            <RegistroU 
-                usuarioE={usuarioSeleccionado} 
-                limpiarSeleccion={() => setUsuarioS(null)} 
-                onActualizacion={obtenerUsuarios} 
-            />
-            
+            {user?.rol === 'admin' && (
+                <RegistroU
+                    usuarioE={usuarioSeleccionado}
+                    limpiarSeleccion={() => setUsuarioS(null)}
+                    onActualizacion={obtenerUsuarios}
+                />
+            )}
+
             <table className="tabla-usuarios">
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Username</th>
+                        <th>Nombre</th>
+                        <th>Dirección</th>
+                        <th>Teléfono</th>
                         <th>Email</th>
-                        <th>Password</th>
-                        <th>Añadir</th>
-                        <th>Editar</th>
-                        <th>Eliminar</th>
+                        <th>Rol</th>
+                        {user?.rol === 'admin' && (
+                            <>
+                                <th>Editar</th>
+                                <th>Eliminar</th>
+                            </>
+                        )}
                     </tr>
                 </thead>
                 <tbody>
                     {usuarios.map((usuario) => (
                         <tr key={usuario.id}>
                             <td>{usuario.id}</td>
-                            <td>{usuario.username}</td>
+                            <td>{usuario.nombre}</td>
+                            <td>{usuario.direccion}</td>
+                            <td>{usuario.telefono}</td>
                             <td>{usuario.email}</td>
-                            <td>{usuario.password}</td>
+                            <td>{usuario.rol}</td>
 
-                            
-                            <td>
-    <button className="btn-add">
-        Añadir
-    </button>
-</td>
-
-<td>
-    <button 
-        className="btn-edit"
-        onClick={() => setUsuarioS(usuario)}
-    >
-        Editar
-    </button>
-</td>
-
-<td>
-    <button 
-        className="btn-delete"
-        onClick={() => removeUsuario(usuario.id)}
-    >
-        Eliminar
-    </button>
-</td>
+                            {user?.rol === 'admin' && (
+                                <>
+                                    <td>
+                                        <button
+                                            className="btn-editar"
+                                            onClick={() => setUsuarioS(usuario)}
+                                        >
+                                            Editar
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button
+                                            className="btn-eliminar"
+                                            onClick={() => removeUsuario(usuario.id)}
+                                        >
+                                            Eliminar
+                                        </button>
+                                    </td>
+                                </>
+                            )}
                         </tr>
                     ))}
                 </tbody>
